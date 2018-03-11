@@ -1,7 +1,7 @@
 # The first thing you need to configure is which modules you need in your app.
 # The default is nothing which will include only core features (password encryption, login/logout).
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
-# :reset_password, :session_timeout, :brute_force_protection, :activity_logging, :external
+# :reset_password, :session_timeout, :brute_force_protection, :activity_logging, :external, :jwt_auth
 Rails.application.config.sorcery.submodules = []
 
 # Here you can configure each submodule's features.
@@ -500,6 +500,38 @@ Rails.application.config.sorcery.configure do |config|
     # Default: `:uid`
     #
     # user.provider_uid_attribute_name =
+
+    # -- jwt_auth --
+
+    # Parameters passed for generating payload part of token
+    # Default: [:id]
+    #
+    # config.jwt_user_params =
+
+    # Header name which will parsed
+    # Default: `Authorization`
+    #
+    # config.jwt_headers_key =
+
+    # Key on which returned user data
+    # Default: :user_data
+    #
+    # config.jwt_user_data_key =
+
+    # Key on which returned token
+    # Default: :auth_token
+    #
+    # config.jwt_auth_token_key =
+
+    # A flag that specifies whether to perform a database query to set the current_user
+    # Default: true
+    #
+    # config.jwt_set_user =
+
+    # Secret key for token generation
+    # Default: nil
+    #
+    # config.jwt_secret_key = '<%= SecureRandom.hex(64) %>'
   end
 
   # This line must come after the 'user config' block.
